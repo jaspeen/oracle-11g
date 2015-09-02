@@ -1,0 +1,11 @@
+export ORACLE_BASE=/opt/oracle/app
+export ORACLE_SID=orcl
+export ORACLE_HOME=$ORACLE_BASE/product/11.2.0/dbhome_1
+export ORACLE_DATA=/opt/oracle/app/oradata
+export PATH=$PATH:$ORACLE_BASE/bin
+export PATH=/usr/sbin:$PATH
+export PATH=$ORACLE_HOME/bin:$PATH
+export LD_LIBRARY_PATH=$ORACLE_HOME/lib:/lib:/usr/lib
+export CLASSPATH=$ORACLE_HOME/jlib:$ORACLE_HOME/rdbms/jlib
+export NLS_DATE_FORMAT="YYYY-MM-DD HH24:MI:SS"
+export ORACLE_HOME_LISTNER=$ORACLE_HOME
