@@ -76,11 +76,11 @@ shu_immediate() {
 
 change_dpdump_dir () {
 	echo_green "Changind dpdump dir to /opt/oracle/dpdump"
-	sqlplus -s /nolog <<EOF
-connect sys/$SYSPWD as sysdba
-Create Or Replace Directory Data_Pump_Dir As '/opt/oracle/dpdump';
-exit
-EOF
+	sqlplus / as sysdba <<-EOF |
+		create or replace directory data_pump_dir as '/opt/oracle/dpdump';
+		exit 0
+	EOF
+	while read line; do echo -e "sqlplus: $line"; done
 }
 
 echo "Checking shared memory..."
