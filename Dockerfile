@@ -9,4 +9,4 @@ RUN /assets/setup.sh
 EXPOSE 1521
 EXPOSE 8080
 
-ENTRYPOINT ["/assets/entrypoint.sh"]
+CMD ["/assets/entrypoint.sh"]
