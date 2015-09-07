@@ -24,7 +24,6 @@ users () {
 	echo "root:install" | chpasswd
 	sed -i "s/pam_namespace.so/pam_namespace.so\nsession    required     pam_limits.so/g" /etc/pam.d/login
 	mkdir -p -m 755 /opt/oracle/app
-	mkdir -p -m 755 /opt/oracle/oradata
 	mkdir -p -m 755 /opt/oracle/oraInventory
 	mkdir -p -m 755 /opt/oracle/dpdump
 	chown -R oracle:oinstall /opt/oracle

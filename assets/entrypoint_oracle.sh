@@ -4,9 +4,9 @@ set -e
 source /assets/colorecho
 source ~/.bashrc
 
-alert_log="$ORACLE_DATA/diag/rdbms/orcl/$ORACLE_SID/trace/alert_$ORACLE_SID.log"
-listener_log="$ORACLE_DATA/diag/tnslsnr/$HOSTNAME/listener/trace/listener.log"
-pfile=$ORACLE_DATA/dbs/init$ORACLE_SID.ora
+alert_log="$ORACLE_BASE/diag/rdbms/orcl/$ORACLE_SID/trace/alert_$ORACLE_SID.log"
+listener_log="$ORACLE_BASE/diag/tnslsnr/$HOSTNAME/listener/trace/listener.log"
+pfile=$ORACLE_HOME/dbs/init.ora
 
 # monitor $logfile
 monitor() {
