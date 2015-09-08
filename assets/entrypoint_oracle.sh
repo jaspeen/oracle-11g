@@ -6,7 +6,7 @@ source ~/.bashrc
 
 alert_log="$ORACLE_BASE/diag/rdbms/orcl/$ORACLE_SID/trace/alert_$ORACLE_SID.log"
 listener_log="$ORACLE_BASE/diag/tnslsnr/$HOSTNAME/listener/trace/listener.log"
-pfile=$ORACLE_HOME/dbs/init.ora
+pfile=$ORACLE_HOME/dbs/init$ORACLE_SID.ora
 
 # monitor $logfile
 monitor() {
@@ -30,7 +30,7 @@ start_db() {
 	MON_ALERT_PID=$!
 	sqlplus / as sysdba <<-EOF |
 		pro Starting with pfile='$pfile' ...
-		startup pfile='$pfile';
+		startup;
 		alter system register;
 		exit 0
 	EOF
@@ -44,14 +44,17 @@ create_db() {
 	monitor $alert_log alertlog &
 	MON_ALERT_PID=$!
 	monitor $listener_log listener &
-	lsnrctl start | while read line; do echo -e "lsnrctl: $line"; done
-	MON_LSNR_PID=$!
+	#lsnrctl start | while read line; do echo -e "lsnrctl: $line"; done
+	#MON_LSNR_PID=$!
+        echo "START DBCA"
 	dbca -silent -createDatabase -responseFile /assets/dbca.rsp
 	echo_green "Database created."
 	date "+%F %T"
 	change_dpdump_dir
+        touch $pfile
 	trap_db
-	wait $MON_ALERT_PID
+        kill $MON_ALERT_PID
+	#wait $MON_ALERT_PID
 }
 
 stop() {
@@ -85,4 +88,7 @@ change_dpdump_dir () {
 
 echo "Checking shared memory..."
 df -h | grep "Mounted on" && df -h | egrep --color "^.*/dev/shm" || echo "Shared memory is not mounted."
-[ -f $pfile ] && start_db || create_db
+if [ ! -f $pfile ]; then
+  create_db;
+fi 
+start_db
