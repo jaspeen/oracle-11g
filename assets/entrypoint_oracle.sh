@@ -81,10 +81,13 @@ change_dpdump_dir () {
 	echo_green "Changind dpdump dir to /opt/oracle/dpdump"
 	sqlplus / as sysdba <<-EOF |
 		create or replace directory data_pump_dir as '/opt/oracle/dpdump';
+		commit;
 		exit 0
 	EOF
 	while read line; do echo -e "sqlplus: $line"; done
 }
+
+chmod 777 /opt/oracle/dpdump
 
 echo "Checking shared memory..."
 df -h | grep "Mounted on" && df -h | egrep --color "^.*/dev/shm" || echo "Shared memory is not mounted."
