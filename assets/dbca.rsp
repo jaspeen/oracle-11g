@@ -607,8 +607,9 @@ CHARACTERSET="AL32UTF8"
 # Description   : comma separated list of name=value pairs. Overrides initialization parameters defined in templates
 # Default value : None
 # Mandatory     : NO
+# 新增 java_jit_enabled=false 参数, 否则建库时会到76%时会挂起
 #-----------------------------------------------------------------------------
-INITPARAMS="memory_target=0,sga_target=500,pga_aggregate_target=100"
+INITPARAMS="memory_target=0,sga_target=500,pga_aggregate_target=100,java_jit_enabled=false"
 
 #-----------------------------------------------------------------------------
 # Name          : SAMPLESCHEMA
