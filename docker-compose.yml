@@ -1,0 +1,16 @@
+version: '3'
+services:
+  oracledb:
+    image: oracle-11g-aqa
+    privileged: true
+    ports:
+      - '1521:1521'
+    volumes:
+      - './oradata:/opt/oracle/data'
+      - './local_dump:/opt/oracle/dpdump'
+      - './init:/opt/init'
+
+volumes:
+  oradata:
+  local_dump:
+  init:
