@@ -608,7 +608,7 @@ CHARACTERSET="AL32UTF8"
 # Default value : None
 # Mandatory     : NO
 #-----------------------------------------------------------------------------
-INITPARAMS="memory_target=0,sga_target=500,pga_aggregate_target=100"
+INITPARAMS="memory_target=0,sga_target=500,pga_aggregate_target=100,java_jit_enabled=false"
 
 #-----------------------------------------------------------------------------
 # Name          : SAMPLESCHEMA
